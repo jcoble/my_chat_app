@@ -1,5 +1,26 @@
 {
     "cSpell.words": [
         "Supabase"
+    ],
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 54322,
+            "driver": "PostgreSQL",
+            "username": "postgres",
+            "password": "postgres",
+            "name": "local supabase",
+            "connectString": "postgresql://postgres:postgres@localhost:54322/postgres"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "askForPassword": true,
+            "driver": "PostgreSQL",
+            "connectString": "postgresql://postgres:HskaT49WHctt@db.whxohzyoubgqyqkelsfj.supabase.co:5432/postgres",
+            "name": "cloudserver"
+        }
     ]
 }
