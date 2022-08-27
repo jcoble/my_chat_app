@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:my_chat_app/constants/constants.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:my_chat_app/utils/constants.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:my_chat_app/pages/splash_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await dotenv.load();
   await Supabase.initialize(
-    // TODO: Replace credentials with your own
-    url: 'http://supabase_kong_my_chat_app:8000',
-    anonKey: process.env.SUPABASE_KEY,
+    url: Environment.SupabaseURL,
+    anonKey: Environment.SupabaseAnonKey,
   );
   runApp(const MyApp());
 }

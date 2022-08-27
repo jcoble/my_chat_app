@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// Supabase client
@@ -12,6 +13,11 @@ const formSpacer = SizedBox(width: 16, height: 16);
 
 /// Some padding for all the forms to use
 const formPadding = EdgeInsets.symmetric(vertical: 20, horizontal: 16);
+
+class Environment {
+  static String get SupabaseURL => dotenv.env['SUPABASE_URL'] ?? 'SUPABASE_URL not found';
+  static String get SupabaseAnonKey => dotenv.env['SUPABASE_ANON_KEY'] ?? 'SUPABASE_ANON_KEY not found';
+}
 
 /// Basic theme to change the look and feel of the app
 final appTheme = ThemeData.light().copyWith(
