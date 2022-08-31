@@ -8,7 +8,12 @@
 .buildlog/
 .history
 .svn/
-migrate_working_dir/
+/supabase/schema_diff/*
+/supabase/migrations/*
+
+.dart_tool/
+.idea/
+/containers/
 
 # IntelliJ related
 *.iml
@@ -51,3 +56,5 @@ app.*.map.json
 # We'll investigate these later in the article.
 .env.development
 .env.production
+ containers
+ containers/supabase_postgres_arm64.sql

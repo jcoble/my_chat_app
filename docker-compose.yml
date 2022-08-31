@@ -1,0 +1,12 @@
+version: '3'
+
+# supabase/postgres 14.1.0 and beyond
+services:
+  db:
+    image: supabase/postgres
+    platform: linux/arm64
+    ports:
+      - "54322:5432"
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    environment:
+      POSTGRES_PASSWORD: postgres

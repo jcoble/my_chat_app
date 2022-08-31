@@ -33,6 +33,7 @@ comment on table public.messages is 'Holds individual messages within a chat roo
 
 alter publication supabase_realtime add table public.room_participants;
 alter publication supabase_realtime add table public.messages;
+alter publication supabase_realtime add table public.profiles;
 
 
 -- *** Security definer functions ***
