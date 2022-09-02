@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_chat_app/src/authentication/data/auth_repository.dart';
-import 'package:my_chat_app/src/authentication/domain/profile.dart';
+import 'package:my_chat_app/src/features/authentication/data/auth_repository.dart';
 
 class AuthController extends StateNotifier<AsyncValue> {
   AuthController({required this.authRepository}) : super(const AsyncValue.data(null));
@@ -9,18 +8,6 @@ class AuthController extends StateNotifier<AsyncValue> {
   Future<bool> signOut() async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() => authRepository.signOut());
-    return state.error == null;
-  }
-
-  Future<bool> getProfile() async {
-    state = const AsyncValue.loading();
-    state = await AsyncValue.guard(() => authRepository.getProfile());
-    return state.error == null;
-  }
-
-  Future<bool> updateProfile(Profile profile) async {
-    state = const AsyncValue.loading();
-    state = await AsyncValue.guard(() => authRepository.updateProfile(profile));
     return state.error == null;
   }
 }

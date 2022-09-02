@@ -20,7 +20,7 @@ void main() async {
   //     authCallbackUrlHostname: 'login-callback', // optional
   //     debug: true // optional
   //     );
-  await SupabaseAuthUi().initSupabase(Environment.supabaseURL, Environment.SupabaseAnonKey);
+  await SupabaseAuthUi().initSupabase(Environment.supabaseURL, Environment.supabaseAnonKey);
   // turn off the # in the URLs on the web
   GoRouter.setUrlPathStrategy(UrlPathStrategy.path);
   // * Entry point of the app

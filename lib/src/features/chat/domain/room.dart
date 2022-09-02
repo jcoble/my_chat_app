@@ -1,4 +1,4 @@
-import 'package:my_chat_app/src/chat/domain/message.dart';
+import 'package:my_chat_app/src/features/chat/domain/message.dart';
 
 class Room {
   Room({

@@ -1,15 +1,15 @@
-import 'package:my_chat_app/src/authentication/data/auth_repository.dart';
-import 'package:my_chat_app/src/chat/presentation/home_app_bar/messages_icon.dart';
-import 'package:my_chat_app/src/chat/presentation/home_app_bar/more_menu_button.dart';
 import 'package:my_chat_app/src/components/action_text_button.dart';
-import 'package:my_chat_app/src/routing/app_router.dart';
-import 'package:my_chat_app/src/utils/breakpoint.dart';
-import 'package:my_chat_app/src/utils/string_hardcoded.dart';
+import 'package:my_chat_app/src/features/authentication/data/auth_repository.dart';
+import 'package:my_chat_app/src/features/chat/presentation/home_app_bar/messages_icon.dart';
+import 'package:my_chat_app/src/features/chat/presentation/home_app_bar/more_menu_button.dart';
 
 import 'package:flutter/material.dart';
 import 'package:my_chat_app/src/components/primary_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:my_chat_app/src/routing/app_router.dart';
+import 'package:my_chat_app/src/utils/breakpoint.dart';
+import 'package:my_chat_app/src/utils/string_hardcoded.dart';
 
 /// Custom [AppBar] widget that is reused by the [ProductsListScreen] and
 /// [ProductScreen].

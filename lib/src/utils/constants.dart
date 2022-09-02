@@ -3,7 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final appBar = AppBar(
-  title: const Text('auth ui example'),
+  title: const Text('Supabase Chat App'),
   automaticallyImplyLeading: false,
 );
 
@@ -50,8 +50,8 @@ const formPadding = EdgeInsets.symmetric(vertical: 20, horizontal: 16);
 
 class Environment {
   static String get supabaseURL => dotenv.env['SUPABASE_URL'] ?? 'SUPABASE_URL not found';
-  static String get SupabaseAnonKey => dotenv.env['SUPABASE_ANON_KEY'] ?? 'SUPABASE_ANON_KEY not found';
-  static String get SupabasePlatform => dotenv.env['PLATFORM'] ?? 'PLATFORM not found';
+  static String get supabaseAnonKey => dotenv.env['SUPABASE_ANON_KEY'] ?? 'SUPABASE_ANON_KEY not found';
+  static String get supabasePlatform => dotenv.env['PLATFORM'] ?? 'linux/arm64';
 }
 
 final appTheme = ThemeData.light().copyWith(

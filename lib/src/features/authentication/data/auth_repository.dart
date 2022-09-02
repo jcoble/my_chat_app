@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_chat_app/src/authentication/domain/profile.dart';
+import 'package:my_chat_app/src/features/authentication/domain/profile.dart';
 import 'package:my_chat_app/src/utils/constants.dart';
 import 'package:my_chat_app/src/utils/in_memory_store.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide Provider;
@@ -14,17 +14,8 @@ class AuthRepository {
   Future<void> signOut() async {
     _authState.value = null;
   }
-
-  void dispose() => _authState.close();
-
-  Future<Profile> getProfile() async {
-    final response = await supabase.from('profiles').select().single();
-    return Profile.fromMap(response);
-  }
-
-  Future<void> updateProfile(Profile profile) async {
-    await supabase.from('profiles').update(profile.toMap());
-  }
+  
+  dispose() {}
 }
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
