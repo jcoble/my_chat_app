@@ -13,27 +13,22 @@ part 'room.g.dart';
 
 @unfreezed
 class Room with _$Room {
-  Room({
-    required this.id,
-    required this.createdAt,
-    required this.otherUserId,
-    this.lastMessage,
-  }) = _Room;
+  factory Room({required String id, required DateTime createdAt, required String otherUserId, Message? lastMessage}) =
+      _Room;
 
   /// ID of the room
-  final String id;
+  // final String id;
 
-  /// Date and time when the room was created
-  final DateTime createdAt;
+  // /// Date and time when the room was created
+  // final DateTime createdAt;
 
-  /// ID of the user who the user is talking to
-  final String otherUserId;
+  // /// ID of the user who the user is talking to
+  // final String otherUserId;
 
-  /// Latest message submitted in the room
-  final Message? lastMessage;
+  // /// Latest message submitted in the room
+  // final Message? lastMessage;
 
-  factory Room.fromJson(Map<String, dynamic> json) => _$RoomFromJson(json);
-  factory Room.toJson() => _$RoomToJson(this);
+  factory Room.fromJson(Map<String, Object?> json) => _$RoomFromJson(json);
 
   // Map<String, dynamic> toMap() {
   //   return {
@@ -43,9 +38,9 @@ class Room with _$Room {
   // }
 
   /// Creates a room object from room_participants table
-  Room.fromRoomParticipants(Map<String, dynamic> map)
-      : id = map['room_id'],
-        otherUserId = map['profile_id'],
-        createdAt = DateTime.parse(map['created_at']),
-        lastMessage = null;
+  // Room.fromRoomParticipants(Map<String, dynamic> map)
+  //     : id = map['room_id'],
+  //       otherUserId = map['profile_id'],
+  //       createdAt = DateTime.parse(map['created_at']),
+  //       lastMessage = null;
 }

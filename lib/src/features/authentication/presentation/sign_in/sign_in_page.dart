@@ -16,64 +16,67 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Sign In'.hardcoded)),
-      body: const SignIn(),
+      body: SupaEmailAuth(
+        authAction: AuthAction.signIn,
+        redirectUrl: '/',
+      ),
     );
   }
 }
 
-class SignIn extends ConsumerStatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+// class SignIn extends ConsumerStatefulWidget {
+//   const SignIn({Key? key}) : super(key: key);
 
-  @override
-  ConsumerState<SignIn> createState() => _SignInState();
-}
+//   @override
+//   ConsumerState<SignIn> createState() => _SignInState();
+// }
 
-class _SignInState extends ConsumerState<SignIn> {
-  @override
-  Widget build(BuildContext context) {
-    final authRepo = ref.watch(authRepositoryProvider);
-    final user = authRepo.currentUser;
-    final screenWidth = MediaQuery.of(context).size.width;
-    if (screenWidth < Breakpoint.tablet) {
-      return AppBar(
-        title: Text('Chat App'.hardcoded),
-        actions: [
-          const MessagesIcon(),
-          MoreMenuButton(user: user),
-        ],
-      );
-    } else {
-      return const Scaffold(
-        // appBar: appBar,
-        body: SupaEmailAuth(
-          authAction: AuthAction.signIn,
-          redirectUrl: '/',
-        ),
-        // TextButton(
-        //   child: const Text(
-        //     'Forgot Password? Click here',
-        //     style: TextStyle(fontWeight: FontWeight.bold),
-        //   ),
-        //   onPressed: () => Navigator.pushNamed(context, '/forgot_password');
-        // ),
-        // TextButton(
-        //   child: const Text(
-        //     'Don\'t have an account? Sign Up',
-        //     style: TextStyle(fontWeight: FontWeight.bold),
-        //   ),
-        //   onPressed: () => Navigator.pushNamed(context, '/signUp'),
-        // ),
-        // const Divider(),
-        // optionText,
-        // spacer,
-        // signInBtn(context, Icons.email, 'Sign in with Magic Link', () {
-        //   Navigator.popAndPushNamed(context, '/magic_link');
-        // }),
-        // spacer,
-        // signInBtn(context, Icons.phone, 'Sign in with Phone', () {
-        //   Navigator.popAndPushNamed(context, '/phone_sign_in');
-        // }),
-      );
-    }
-  }
-}
+// class _SignInState extends ConsumerState<SignIn> {
+//   @override
+//   Widget build(BuildContext context) {
+//     final authRepo = ref.watch(authRepositoryProvider);
+//     final user = authRepo.currentUser;
+//     final screenWidth = MediaQuery.of(context).size.width;
+//     if (screenWidth < Breakpoint.tablet) {
+//       return AppBar(
+//         title: Text('Chat App'.hardcoded),
+//         actions: [
+//           const MessagesIcon(),
+//           MoreMenuButton(user: user),
+//         ],
+//       );
+//     } else {
+//       return const Scaffold(
+//         // appBar: appBar,
+//         body: SupaEmailAuth(
+//           authAction: AuthAction.signIn,
+//           redirectUrl: '/',
+//         ),
+//         // TextButton(
+//         //   child: const Text(
+//         //     'Forgot Password? Click here',
+//         //     style: TextStyle(fontWeight: FontWeight.bold),
+//         //   ),
+//         //   onPressed: () => Navigator.pushNamed(context, '/forgot_password');
+//         // ),
+//         // TextButton(
+//         //   child: const Text(
+//         //     'Don\'t have an account? Sign Up',
+//         //     style: TextStyle(fontWeight: FontWeight.bold),
+//         //   ),
+//         //   onPressed: () => Navigator.pushNamed(context, '/signUp'),
+//         // ),
+//         // const Divider(),
+//         // optionText,
+//         // spacer,
+//         // signInBtn(context, Icons.email, 'Sign in with Magic Link', () {
+//         //   Navigator.popAndPushNamed(context, '/magic_link');
+//         // }),
+//         // spacer,
+//         // signInBtn(context, Icons.phone, 'Sign in with Phone', () {
+//         //   Navigator.popAndPushNamed(context, '/phone_sign_in');
+//         // }),
+//       );
+//     }
+//   }
+// }

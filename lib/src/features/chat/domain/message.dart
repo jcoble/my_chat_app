@@ -9,43 +9,56 @@ part 'message.g.dart';
 
 @unfreezed
 class Message with _$Message {
-  var myUserId;
-
-  factory Message({
-    required this.myUserId,
-    required this.id,
-    required this.profileId,
-    required this.content,
-    required this.createdAt,
-    this.isMine,
+  factory Message._internal({
+    required String myUserId,
+    required String id,
+    required String profileId,
+    required String content,
+    required DateTime createdAt,
+    bool? isMine,
   }) = _Message;
 
+  factory Message({
+    required String myUserId,
+    required String id,
+    required String profileId,
+    required String content,
+    required DateTime createdAt,
+    bool? isMine,
+  }) {
+    return Message._internal(
+      myUserId: myUserId,
+      id: id,
+      profileId: profileId,
+      content: content,
+      createdAt: createdAt,
+      isMine: (profileId == myUserId),
+    );
+  }
+
   /// ID of the message
-  final String id;
+  // final String id;
 
-  /// ID of the user who posted the message
-  final String profileId;
+  // /// ID of the user who posted the message
+  // final String profileId;
 
-  /// Text content of the message
-  final String content;
+  // /// Text content of the message
+  // final String content;
 
-  /// Date and time when the message was created
-  final DateTime createdAt;
+  // /// Date and time when the message was created
+  // final DateTime createdAt;
 
-  /// Whether the message is sent by the user or not.
-  late final bool? isMine;
+  // /// Whether the message is sent by the user or not.
 
-  factory Message.fromJson(Map<String, dynamic> json) => _$MessageFromJson(json);
-  factory Message.toJson() => _$MessageToJson(this);
-  // Map<String, dynamic> toMap() {
-  //   return {
-  //     'id': id,
-  //     'profile_id': profileId,
-  //     'content': content,
-  //     'created_at': createdAt.toIso8601String(),
-  //     "isMine": profileId == myUserId ? true : false,
-  //   };
-  // }
+  // Message.fromMap({
+  //   required Map<String, dynamic> map,
+  //   required String myUserId,
+  // })  : id = map['id'],
+  //       roomId = map['room_id'],
+  //       profileId = map['profile_id'],
+  //       content = map['content'],
+  //       createdAt = DateTime.parse(map['created_at']),
+  //       isMine = myUserId == map['profile_id'];
 
-  String toJson() => _$MessageToJson(this);
+  factory Message.fromJson(Map<String, Object?> json) => _$MessageFromJson(json);
 }

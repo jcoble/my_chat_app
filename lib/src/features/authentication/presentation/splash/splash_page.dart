@@ -24,7 +24,7 @@ class _PreloadState extends State<Preload> {
         Navigator.of(context).pushReplacementNamed('/signIn');
       } else {
         // context.pushReplacementNamed('/chatRoomList');
-        Navigator.of(context).pushReplacementNamed(AppRoute.chatRoomList.name);
+        Navigator.of(context).pushReplacementNamed(AppRoute.home.name);
       }
     } catch (error) {
       Navigator.of(context).pushReplacementNamed('/signIn');

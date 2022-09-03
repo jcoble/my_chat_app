@@ -11,11 +11,9 @@ class PrimaryButton extends StatelessWidget {
   const PrimaryButton({Key? key, required this.text, this.isLoading = false, this.onPressed}) : super(key: key);
   final String text;
   final bool isLoading;
-  VoidCallback? onPressed => onPressed;
+  final VoidCallback? onPressed;
   @override
-  @override
-  // ignore: non_constant_identifier_names
-  Future<Widget> build(BuildContext context, Function() FutureButton, ) async {
+  Widget build(BuildContext context) {
     return SizedBox(
       height: Sizes.p48,
       child: ElevatedButton(
@@ -30,4 +28,24 @@ class PrimaryButton extends StatelessWidget {
       ),
     );
   }
+
+  // ignore: non_constant_identifier_names
+  // Future<Widget> build(
+  //   BuildContext context,
+  //   Function() FutureButton,
+  // ) async {
+  //   return SizedBox(
+  //     height: Sizes.p48,
+  //     child: ElevatedButton(
+  //       onPressed: onPressed,
+  //       child: isLoading
+  //           ? const CircularProgressIndicator()
+  //           : Text(
+  //               text,
+  //               textAlign: TextAlign.center,
+  //               style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.white),
+  //             ),
+  //     ),
+  //   );
+  // }
 }

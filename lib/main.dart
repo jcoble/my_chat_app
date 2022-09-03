@@ -6,7 +6,7 @@ import 'package:my_chat_app/src/app.dart';
 import 'package:supabase_auth_ui/supabase_auth_ui.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'package:my_chat_app/src/authentication/presentation/splash/splash_page.dart';
+// import 'package:my_chat_app/src/authentication/presentation/splash/splash_page.dart';
 import 'package:my_chat_app/src/utils/constants.dart';
 import 'package:go_router/go_router.dart';
 

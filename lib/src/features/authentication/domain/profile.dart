@@ -8,21 +8,21 @@ part 'profile.freezed.dart';
 part 'profile.g.dart';
 
 @freezed
-class Profile {
-  Profile({
-    required this.id,
-    required this.username,
-    required this.createdAt,
+class Profile with _$Profile {
+  factory Profile({
+    required String id,
+    required String username,
+    required DateTime createdAt,
   }) = _Profile;
 
   /// User ID of the profile
-  final String id;
+  // final String id;
 
-  /// Username of the profile
-  final String username;
+  // /// Username of the profile
+  // final String username;
 
-  /// Date and time when the profile was created
-  final DateTime createdAt;
+  // /// Date and time when the profile was created
+  // final DateTime createdAt;
 
   // Profile.fromMap(Map<String, dynamic> map)
   //     : id = map['id'],
@@ -37,6 +37,5 @@ class Profile {
   //   };
   // }
 
-  factory Message.fromJson(Map<String, dynamic> json) => _$ProfileFromJson(json);
-  factory Message.toJson() => _$ProflleToJson(this);
+  factory Profile.fromJson(Map<String, Object?> json) => _$ProfileFromJson(json);
 }
