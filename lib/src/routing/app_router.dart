@@ -12,7 +12,7 @@ import 'package:my_chat_app/src/features/user_management/presentation/settings_p
 import 'package:my_chat_app/src/routing/not_found_page.dart';
 import 'package:flutter/material.dart';
 
-enum AppRoute { home, chatRoom, signOut, settings, profile, account, signIn, signUp }
+enum AppRoute { home, room, signOut, settings, profile, account, signIn, signUp }
 
 // final goRouterProvider = Provider<GoRouter>((ref) {
 //   final authRepository = ref.watch(authRepositoryProvider);
@@ -26,15 +26,18 @@ final goRouterProvider = Provider<GoRouter>((ref) {
     redirect: (state) {
       final isLoggedIn = authRepository.currentUser != null;
       if (isLoggedIn) {
-        if (state.location == '/signIn') {
+        // go home if logged in and somehow get to signIn or SignUp Uri's
+        if (state.location == '/signIn' || state.location == '/signUp') {
           return '/';
         }
       } else {
-        if (state.location != '/signIn' && state.location != '/signUp') {
-          return '/signIn';
-        }
+        // not logged in so redirect to signIn
+        return '/signIn';
+        // if (state.location != '/signIn' && state.location != '/signUp') {
+        //   return '/signIn';
+        // }
       }
-      return null;
+      return state.location;
     },
     refreshListenable: GoRouterRefreshStream(authRepository.authStateChanges()),
     routes: [
@@ -45,29 +48,12 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         routes: [
           GoRoute(
             path: 'room/:id',
-            name: AppRoute.chatRoom.name,
-            pageBuilder: (context, state) {
-              final roomId = state.params['id']!;
-              return MaterialPage(
-                key: state.pageKey,
-                fullscreenDialog: true,
-                child: ChatPage(roomId: roomId),
-              );
-            },
-            routes: [
-              GoRoute(
-                path: 'account',
-                name: AppRoute.account.name,
-                pageBuilder: (context, state) {
-                  // final productId = state.params['id']!;
-                  return MaterialPage(
-                    key: state.pageKey,
-                    fullscreenDialog: true,
-                    child: const AccountPage(),
-                  );
-                },
-              ),
-            ],
+            name: AppRoute.room.name,
+            pageBuilder: (context, state) => MaterialPage(
+              key: state.pageKey,
+              fullscreenDialog: false,
+              child: ChatPage(roomId: state.params['id']!),
+            ),
           ),
           GoRoute(
             path: 'profile',
@@ -77,21 +63,19 @@ final goRouterProvider = Provider<GoRouter>((ref) {
               fullscreenDialog: true,
               child: ProfilePage(),
             ),
-            routes: [
-              GoRoute(
-                path: 'account',
-                name: AppRoute.account.name,
-                pageBuilder: (context, state) => MaterialPage(
-                  key: ValueKey(state.location),
-                  fullscreenDialog: true,
-                  child: const AccountPage(),
-                ),
-              ),
-            ],
+          ),
+          GoRoute(
+            path: 'account',
+            name: AppRoute.account.name,
+            pageBuilder: (context, state) => MaterialPage(
+              key: ValueKey(state.location),
+              fullscreenDialog: true,
+              child: const AccountPage(),
+            ),
           ),
           GoRoute(
             path: 'settings',
-            name: AppRoute.account.name,
+            name: AppRoute.settings.name,
             pageBuilder: (context, state) => MaterialPage(
               key: state.pageKey,
               fullscreenDialog: true,
@@ -103,7 +87,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             name: AppRoute.signIn.name,
             pageBuilder: (context, state) => MaterialPage(
               key: state.pageKey,
-              fullscreenDialog: true,
+              fullscreenDialog: false,
               child: const SignInPage(),
             ),
           ),
@@ -112,7 +96,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             name: AppRoute.signUp.name,
             pageBuilder: (context, state) => MaterialPage(
               key: state.pageKey,
-              fullscreenDialog: true,
+              fullscreenDialog: false,
               child: const SignUpPage(),
             ),
           ),

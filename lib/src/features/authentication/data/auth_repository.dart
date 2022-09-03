@@ -14,7 +14,7 @@ class AuthRepository {
   Future<void> signOut() async {
     _authState.value = null;
   }
-  
+
   dispose() {}
 }
 

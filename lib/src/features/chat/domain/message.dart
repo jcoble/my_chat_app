@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -13,6 +13,7 @@ class Message with _$Message {
     required String myUserId,
     required String id,
     required String profileId,
+    required String roomId,
     required String content,
     required DateTime createdAt,
     bool? isMine,
@@ -22,6 +23,7 @@ class Message with _$Message {
     required String myUserId,
     required String id,
     required String profileId,
+    required String roomId,
     required String content,
     required DateTime createdAt,
     bool? isMine,
@@ -30,6 +32,7 @@ class Message with _$Message {
       myUserId: myUserId,
       id: id,
       profileId: profileId,
+      roomId: roomId,
       content: content,
       createdAt: createdAt,
       isMine: (profileId == myUserId),
@@ -37,28 +40,37 @@ class Message with _$Message {
   }
 
   /// ID of the message
-  // final String id;
+  @override
+  final String id;
 
-  // /// ID of the user who posted the message
-  // final String profileId;
+  /// ID of the user who posted the message
+  @override
+  final String profileId;
 
   // /// Text content of the message
-  // final String content;
+  @override
+  final String content;
 
   // /// Date and time when the message was created
-  // final DateTime createdAt;
+  @override
+  final DateTime createdAt;
 
-  // /// Whether the message is sent by the user or not.
+  @override
+  final bool? isMine;
 
-  // Message.fromMap({
-  //   required Map<String, dynamic> map,
-  //   required String myUserId,
-  // })  : id = map['id'],
-  //       roomId = map['room_id'],
-  //       profileId = map['profile_id'],
-  //       content = map['content'],
-  //       createdAt = DateTime.parse(map['created_at']),
-  //       isMine = myUserId == map['profile_id'];
+  @override
+  final String roomId;
+  // // /// Whether the message is sent by the user or not.
+
+  Message.fromMap({
+    required Map<String, dynamic> map,
+    required String myUserId,
+  })  : id = map['id'],
+        roomId = map['room_id'],
+        profileId = map['profile_id'],
+        content = map['content'],
+        createdAt = DateTime.parse(map['created_at']),
+        isMine = myUserId == map['profile_id'];
 
   factory Message.fromJson(Map<String, Object?> json) => _$MessageFromJson(json);
 }

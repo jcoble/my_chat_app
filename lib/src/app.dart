@@ -13,6 +13,7 @@ class MyApp extends ConsumerWidget {
     return MaterialApp.router(
       routerDelegate: goRouter.routerDelegate,
       routeInformationParser: goRouter.routeInformationParser,
+      routeInformationProvider: goRouter.routeInformationProvider,
       debugShowCheckedModeBanner: false,
       restorationScopeId: 'app',
       onGenerateTitle: (BuildContext context) => 'Chat App'.hardcoded,

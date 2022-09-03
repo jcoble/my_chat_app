@@ -26,6 +26,8 @@ mixin _$Message {
   set id(String value) => throw _privateConstructorUsedError;
   String get profileId => throw _privateConstructorUsedError;
   set profileId(String value) => throw _privateConstructorUsedError;
+  String get roomId => throw _privateConstructorUsedError;
+  set roomId(String value) => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   set content(String value) => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -46,6 +48,7 @@ abstract class $MessageCopyWith<$Res> {
       {String myUserId,
       String id,
       String profileId,
+      String roomId,
       String content,
       DateTime createdAt,
       bool? isMine});
@@ -64,6 +67,7 @@ class _$MessageCopyWithImpl<$Res> implements $MessageCopyWith<$Res> {
     Object? myUserId = freezed,
     Object? id = freezed,
     Object? profileId = freezed,
+    Object? roomId = freezed,
     Object? content = freezed,
     Object? createdAt = freezed,
     Object? isMine = freezed,
@@ -80,6 +84,10 @@ class _$MessageCopyWithImpl<$Res> implements $MessageCopyWith<$Res> {
       profileId: profileId == freezed
           ? _value.profileId
           : profileId // ignore: cast_nullable_to_non_nullable
+              as String,
+      roomId: roomId == freezed
+          ? _value.roomId
+          : roomId // ignore: cast_nullable_to_non_nullable
               as String,
       content: content == freezed
           ? _value.content
@@ -107,6 +115,7 @@ abstract class _$$_MessageCopyWith<$Res> implements $MessageCopyWith<$Res> {
       {String myUserId,
       String id,
       String profileId,
+      String roomId,
       String content,
       DateTime createdAt,
       bool? isMine});
@@ -126,6 +135,7 @@ class __$$_MessageCopyWithImpl<$Res> extends _$MessageCopyWithImpl<$Res>
     Object? myUserId = freezed,
     Object? id = freezed,
     Object? profileId = freezed,
+    Object? roomId = freezed,
     Object? content = freezed,
     Object? createdAt = freezed,
     Object? isMine = freezed,
@@ -142,6 +152,10 @@ class __$$_MessageCopyWithImpl<$Res> extends _$MessageCopyWithImpl<$Res>
       profileId: profileId == freezed
           ? _value.profileId
           : profileId // ignore: cast_nullable_to_non_nullable
+              as String,
+      roomId: roomId == freezed
+          ? _value.roomId
+          : roomId // ignore: cast_nullable_to_non_nullable
               as String,
       content: content == freezed
           ? _value.content
@@ -166,6 +180,7 @@ class _$_Message implements _Message {
       {required this.myUserId,
       required this.id,
       required this.profileId,
+      required this.roomId,
       required this.content,
       required this.createdAt,
       this.isMine});
@@ -180,6 +195,8 @@ class _$_Message implements _Message {
   @override
   String profileId;
   @override
+  String roomId;
+  @override
   String content;
   @override
   DateTime createdAt;
@@ -188,7 +205,7 @@ class _$_Message implements _Message {
 
   @override
   String toString() {
-    return 'Message._internal(myUserId: $myUserId, id: $id, profileId: $profileId, content: $content, createdAt: $createdAt, isMine: $isMine)';
+    return 'Message._internal(myUserId: $myUserId, id: $id, profileId: $profileId, roomId: $roomId, content: $content, createdAt: $createdAt, isMine: $isMine)';
   }
 
   @JsonKey(ignore: true)
@@ -209,6 +226,7 @@ abstract class _Message implements Message {
       {required String myUserId,
       required String id,
       required String profileId,
+      required String roomId,
       required String content,
       required DateTime createdAt,
       bool? isMine}) = _$_Message;
@@ -224,6 +242,9 @@ abstract class _Message implements Message {
   @override
   String get profileId;
   set profileId(String value);
+  @override
+  String get roomId;
+  set roomId(String value);
   @override
   String get content;
   set content(String value);
