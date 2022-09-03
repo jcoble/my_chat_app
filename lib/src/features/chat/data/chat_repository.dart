@@ -7,33 +7,22 @@ import 'package:flutter/material.dart';
 // Page to chat with someone.
 ///
 /// Displays chat bubbles as a ListView and TextField to enter new chat.
-class ChatPage extends StatefulWidget {
-  const ChatPage({Key? key}) : super(key: key);
 
-  static Route<void> route() {
-    return MaterialPageRoute(
-      builder: (context) => const ChatPage(),
-    );
-  }
+class ChatController extends StateNotifier<AsyncValue> {
+  ChatController({required this.chatRepository}) : super(const AsyncValue.data(null));
+  final ChatRepository chatRepository;
 
-  @override
-  State<ChatPage> createState() => _ChatPageState();
-}
+  // late final Stream<List<Message>>  async {};
+  // @override
+  // Future<bool> sendMessage(Message message) async {
+  //   state = const AsyncValue.loading();
+  //   state = await AsyncValue.guard((message) => chatRepository.sendMessage(message));
+  //   return state.error == null;
+  // }
 
-class _ChatPageState extends State<AsyncValue> {
-  var chatRepository;
+  // // get stream of messages from ChatRepository
+  // Stream<List<Message>> get messagesStream => chatRepository.getMyMessagesStream();
 
-  late final Stream<List<Message>>  async {};
-  @override
-  Future<bool> sendMessage(Message message) async {
-    state = const AsyncValue.loading();
-    state = await AsyncValue.guard((message) => chatRepository.sendMessage(message));
-    return state.error == null;
-  }
-
-  // get stream of messages from ChatRepository
-  Stream<List<Message>> get messagesStream => chatRepository.getMyMessagesStream();
-  
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -60,24 +49,24 @@ class ChatRepository {
 
   // stream of messages from the server (ordered by created_at)
   // only from user's that have sent messages to the current user.
-  Stream<List<Message>> getMyMessagesStream() {
-    final myUserId = supabase.auth.currentUser!.id;
-    return supabase
-        .from('messages')
-        .stream(['messages:profile_id=eq.$myUserId'])
-        .order('created_at')
-        .execute()
-        .map((maps) => maps
-            .map(
-              (map) => Message.fromMap({myUserId: myUserId}, map: map, myUserId: myUserId),
-            )
-            .toList());
-  }
+  // Stream<List<Message>> getMyMessagesStream() {
+  //   final myUserId = supabase.auth.currentUser!.id;
+  //   return supabase
+  //       .from('messages')
+  //       .stream(['messages:profile_id=eq.$myUserId'])
+  //       .order('created_at')
+  //       .execute()
+  //       .map((maps) => maps
+  //           .map(
+  //             (map) => Message.fromMap({myUserId: myUserId}, map: map, myUserId: myUserId),
+  //           )
+  //           .toList());
+  // }
 
-  Future<bool> sendMessage(Message message) async {
-    final res = await supabase.from('messages').insert(message.toMap());
-    return res.error == null;
-  }
+  // Future<bool> sendMessage(Message message) async {
+  //   final res = await supabase.from('messages').insert(message.toMap());
+  //   return res.error == null;
+  // }
 }
 
 final chatRepositoryProvider = Provider((ref) => ChatRepository());

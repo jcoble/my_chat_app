@@ -88,7 +88,7 @@ create or replace function create_new_room(other_user_id uuid) returns uuid as $
         with rooms_with_profiles as (
             select room_id, array_agg(profile_id) as participants
             from room_participants
-            group by room_id               
+            group by room_id 
         )
         select room_id
         into new_room_id
@@ -212,8 +212,6 @@ create trigger on_auth_user_created
 -- comment
 --     on table public.messages is 'Holds individual messages within a chat room.';
 
--- -- *** Add tables to the publication to enable realtime ***
-
 -- alter publication
 --     supabase_realtime
 -- add
@@ -222,8 +220,6 @@ create trigger on_auth_user_created
 -- alter publication supabase_realtime add table public.messages;
 
 -- alter publication supabase_realtime add table public.profiles;
-
--- -- *** Security definer functions ***
 
 -- -- Returns true if the signed in user is a participant of the room
 
