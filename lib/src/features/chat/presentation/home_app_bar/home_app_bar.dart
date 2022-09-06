@@ -1,5 +1,6 @@
 import 'package:my_chat_app/src/components/action_text_button.dart';
 import 'package:my_chat_app/src/features/authentication/data/auth_repository.dart';
+import 'package:my_chat_app/src/features/authentication/presentation/controllers/auth_controller.dart';
 import 'package:my_chat_app/src/features/chat/presentation/home_app_bar/messages_icon.dart';
 import 'package:my_chat_app/src/features/chat/presentation/home_app_bar/more_menu_button.dart';
 
@@ -8,20 +9,24 @@ import 'package:my_chat_app/src/components/primary_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_chat_app/src/routing/app_router.dart';
+import 'package:my_chat_app/src/routing/routes.dart';
+import 'package:my_chat_app/src/utils/async_value_ui.dart';
 import 'package:my_chat_app/src/utils/breakpoint.dart';
 import 'package:my_chat_app/src/utils/string_hardcoded.dart';
 
-/// Custom [AppBar] widget that is reused by the [ProductsListScreen] and
-/// [ProductScreen].
-/// It shows the following actions, depending on the application state:
-/// - [ShoppingCartIcon]
-/// - Orders button
-/// - Account or Sign-in button
-class HomeAppBar extends ConsumerWidget with PreferredSizeWidget {
+// Custom [AppBar] widget that is reused by the [ProductsListScreen] and
+// [ProductScreen].
+// It shows the following actions, depending on the application state:
+// - [ShoppingCartIcon]
+// - Orders button
+// - Account or Sign-in button
+class HomeAppBar extends ConsumerWidget {
   const HomeAppBar({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(authStateChangesProvider).value;
+    ref.listen<AsyncValue>(authControllerProvider, (_, state) => state.showAlertDialogOnError(context));
+    final state = ref.watch(authControllerProvider);
     // * This widget is responsive.
     // * On large screen sizes, it shows all the actions in the app bar.
     // * On small screen sizes, it shows only the shopping cart icon and a
@@ -34,7 +39,7 @@ class HomeAppBar extends ConsumerWidget with PreferredSizeWidget {
       return AppBar(
         title: Text('Messages'.hardcoded),
         actions: [
-          const MessagesIcon(),
+          MessagesIcon(),
           MoreMenuButton(user: user),
         ],
       );
@@ -42,23 +47,25 @@ class HomeAppBar extends ConsumerWidget with PreferredSizeWidget {
       return AppBar(
         title: Text('Messages'.hardcoded),
         actions: [
-          const MessagesIcon(),
+          MessagesIcon(),
           if (user != null) ...[
-            ActionTextButton(
-              key: MoreMenuButton.signOutKey,
-              text: 'Sign Out'.hardcoded,
-              onPressed: () => context.pushNamed(AppRoute.signOut.name),
-            ),
+            // if (state.hasValue) ...[
+            //   ActionTextButton(
+            //     key: MoreMenuButton.signOutKey,
+            //     text: 'Sign Out'.hardcoded,
+            //     onPressed: () => context.pushNamed(AppRoutes.signOut),
+            //   ),
+            // ],
             ActionTextButton(
               key: MoreMenuButton.settingsKey,
               text: 'Settings'.hardcoded,
-              onPressed: () => context.pushNamed(AppRoute.settings.name),
+              onPressed: () => context.pushNamed(AppRoutes.settings),
             ),
           ] else
             ActionTextButton(
               key: MoreMenuButton.profileKey,
               text: 'Profile'.hardcoded,
-              onPressed: () => context.pushNamed(AppRoute.profile.name),
+              onPressed: () => context.pushNamed(AppRoutes.profile),
             )
         ],
       );

@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -39,7 +38,6 @@ class Profile with _$Profile {
 
   factory Profile.fromJson(Map<String, Object?> json) => _$ProfileFromJson(json);
 }
-
 
 // class Profile {
 //   Profile({
@@ -82,5 +80,3 @@ class Profile with _$Profile {
 //     );
 //   }
 // }
-
-

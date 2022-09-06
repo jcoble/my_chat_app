@@ -1,4 +1,5 @@
 import 'package:my_chat_app/src/routing/app_router.dart';
+import 'package:my_chat_app/src/routing/routes.dart';
 import 'package:my_chat_app/src/utils/string_hardcoded.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter/material.dart';
@@ -53,13 +54,13 @@ class MoreMenuButton extends StatelessWidget {
         // push to different routes based on selected option
         switch (option) {
           case PopupMenuOption.signOut:
-            context.pushNamed(AppRoute.signOut.name);
+            context.replaceNamed(AppRoutes.signOut);
             break;
           case PopupMenuOption.settings:
-            context.pushNamed(AppRoute.settings.name);
+            context.replaceNamed(AppRoutes.settings);
             break;
           case PopupMenuOption.profile:
-            context.pushNamed(AppRoute.profile.name);
+            context.replaceNamed(AppRoutes.profile);
             break;
         }
       },

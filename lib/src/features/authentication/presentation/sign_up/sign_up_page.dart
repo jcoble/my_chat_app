@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_chat_app/src/features/authentication/data/auth_repository.dart';
-import 'package:my_chat_app/src/features/authentication/presentation/controllers/auth_controller.dart';
-import 'package:my_chat_app/src/features/authentication/presentation/sign_up/sign_up_page.dart';
-import 'package:my_chat_app/src/features/chat/presentation/home_app_bar/messages_icon.dart';
-import 'package:my_chat_app/src/features/chat/presentation/home_app_bar/more_menu_button.dart';
-import 'package:my_chat_app/src/utils/breakpoint.dart';
+import 'package:my_chat_app/src/routing/routes.dart';
 import 'package:my_chat_app/src/utils/string_hardcoded.dart';
 import 'package:supabase_auth_ui/supabase_auth_ui.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -16,9 +11,27 @@ class SignUpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Sign Up'.hardcoded)),
-      body: SupaEmailAuth(
-        authAction: AuthAction.signUp,
-        redirectUrl: '/',
+      body: Container(
+        padding: const EdgeInsets.all(18.0),
+        child: Column(
+          children: [
+            const SupaEmailAuth(
+              authAction: AuthAction.signUp,
+              redirectUrl: '/',
+            ),
+            Column(
+              children: [
+                TextButton(
+                  child: const Text(
+                    'Already have an account? Sign In',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () => context.goNamed(AppRoutes.signIn),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

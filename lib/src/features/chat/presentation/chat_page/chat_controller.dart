@@ -11,7 +11,7 @@ class ChatController extends StateNotifier<AsyncValue> {
 
   Future<bool> sendMessage(Message message) async {
     state = const AsyncValue.loading();
-    state = await AsyncValue.guard(() async => await chatRepository.sendMessage(message));
+    state = await AsyncValue.guard(() => chatRepository.sendMessage(message));
     return state.error == null;
   }
 
@@ -22,3 +22,8 @@ class ChatController extends StateNotifier<AsyncValue> {
 final chatControllerProvider = StateNotifierProvider.autoDispose<ChatController, AsyncValue>(
   (ref) => ChatController(chatRepository: ref.read(chatRepositoryProvider)),
 );
+
+final messagesStreamProvider = StreamProvider.autoDispose<List<Message>>((ref) {
+  final chatController = ref.watch(chatControllerProvider.notifier);
+  return chatController.messagesStream;
+});

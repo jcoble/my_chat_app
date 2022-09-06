@@ -5,20 +5,48 @@ import 'package:my_chat_app/src/features/authentication/presentation/controllers
 import 'package:my_chat_app/src/features/authentication/presentation/sign_up/sign_up_page.dart';
 import 'package:my_chat_app/src/features/chat/presentation/home_app_bar/messages_icon.dart';
 import 'package:my_chat_app/src/features/chat/presentation/home_app_bar/more_menu_button.dart';
+import 'package:my_chat_app/src/routing/app_router.dart';
+import 'package:my_chat_app/src/routing/routes.dart';
 import 'package:my_chat_app/src/utils/breakpoint.dart';
 import 'package:my_chat_app/src/utils/string_hardcoded.dart';
 import 'package:supabase_auth_ui/supabase_auth_ui.dart';
+import 'package:go_router/go_router.dart';
 
-class SignInPage extends StatelessWidget {
-  const SignInPage({Key? key}) : super(key: key);
+class SignInPage extends ConsumerWidget {
+  SignInPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(title: Text('Sign In'.hardcoded)),
-      body: SupaEmailAuth(
-        authAction: AuthAction.signIn,
-        redirectUrl: '/',
+      body: Container(
+        padding: EdgeInsets.all(18.0),
+        child: Column(
+          children: [
+            const SupaEmailAuth(
+              authAction: AuthAction.signIn,
+              redirectUrl: '/',
+            ),
+            Column(
+              children: [
+                TextButton(
+                  child: const Text(
+                    'Forgot Password? Click here',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () => context.goNamed(AppRoutes.forgotPassword),
+                ),
+                TextButton(
+                  child: const Text(
+                    'Don\'t have an account? Sign Up',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () => context.goNamed(AppRoutes.signUp),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

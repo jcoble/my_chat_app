@@ -4,30 +4,23 @@ import 'package:go_router/go_router.dart';
 
 /// Shopping cart icon with items count badge
 class MessagesIcon extends StatelessWidget {
-  const MessagesIcon({Key? key}) : super(key: key);
+  MessagesIcon({Key? key}) : super(key: key);
 
   // * Keys for testing using find.byKey()
   static const MessagesIconKey = Key('messages-cart-icon');
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Read from data source
-    const messagesItemsCount = 3;
-    return Stack(
-      children: const [
-        Center(
-          child: Icon(Icons.message),
-        ),
-        if (messagesItemsCount > 0)
-          Positioned(
-            top: Sizes.p4,
-            right: Sizes.p4,
-            child: UnreadMessagesIconBadge(itemsCount: messagesItemsCount),
-          ),
-      ],
+    var unreadMessagesCount;
+    return Positioned(
+      top: Sizes.p4,
+      right: Sizes.p4,
+      child: UnreadMessagesIconBadge(itemsCount: unreadMessagesCount),
     );
   }
 }
+// * Keys for testing using find.byKey()
+//  const MessagesIconKey = Key('messages-cart-icon');
 
 /// Icon badge showing the items count
 class UnreadMessagesIconBadge extends StatelessWidget {

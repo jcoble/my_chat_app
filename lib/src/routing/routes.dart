@@ -13,19 +13,19 @@ import 'package:go_router/go_router.dart';
 
 class AppRoutes {
   static const String home = '/';
-  static const String signIn = '/signIn';
-  static const String signUp = '/signUp';
-  static const String rooms = '/rooms';
-  static const String room = '/room/:id';
-  static const String forgotPassword = '/forgot-password';
-  static const String resetPassword = '/reset-password';
-  static const String profile = '/profile';
-  static const String settings = '/settings';
-  static const String account = '/account';
-  static const String contact = '/contact';
-  static const String privacyPolicy = '/privacy-policy';
-  static const String termsOfService = '/terms-of-service';
-  static const String notFound = '/not-found';
+  static const String signIn = 'signIn';
+  static const String signUp = 'signUp';
+  static const String rooms = 'rooms';
+  static const String room = 'room/:id';
+  static const String forgotPassword = 'forgot-password';
+  static const String resetPassword = 'reset-password';
+  static const String profile = 'profile';
+  static const String settings = 'settings';
+  static const String account = 'account';
+  static const String contact = 'contact';
+  static const String privacyPolicy = 'privacy-policy';
+  static const String termsOfService = 'terms-of-service';
+  static const String notFound = 'not-found';
   static const String signOut = '/sign-out';
 
   static List<GoRoute> getRoutes() {
@@ -44,7 +44,7 @@ class AppRoutes {
           //     child: HomePage(),
           //   ),
           GoRoute(
-            path: 'room:id',
+            path: 'room/:id',
             name: AppRoutes.room,
             builder: (context, state) {
               final roomId = state.params['id']!;
