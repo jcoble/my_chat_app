@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_chat_app/src/features/authentication/data/auth_repository.dart';
 import 'package:my_chat_app/src/features/authentication/presentation/controllers/auth_controller.dart';
 import 'package:my_chat_app/src/features/authentication/presentation/sign_up/sign_up_page.dart';
-import 'package:my_chat_app/src/features/chat/presentation/home_app_bar/messages_icon.dart';
-import 'package:my_chat_app/src/features/chat/presentation/home_app_bar/more_menu_button.dart';
 import 'package:my_chat_app/src/routing/app_router.dart';
 import 'package:my_chat_app/src/routing/routes.dart';
 import 'package:my_chat_app/src/utils/breakpoint.dart';
@@ -20,12 +18,20 @@ class SignInPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Sign In'.hardcoded)),
       body: Container(
-        padding: EdgeInsets.all(18.0),
+        padding: const EdgeInsets.all(18.0),
         child: Column(
           children: [
             const SupaEmailAuth(
               authAction: AuthAction.signIn,
               redirectUrl: '/',
+            ),
+            // Social Login Buttons
+            const SupaSocialsAuth(
+              socialProviders: [
+                SocialProviders.google,
+                SocialProviders.github,
+              ],
+              colored: true,
             ),
             Column(
               children: [

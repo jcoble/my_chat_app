@@ -5,11 +5,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_auth_ui/supabase_auth_ui.dart';
-
 import 'package:my_chat_app/src/app.dart';
 import 'package:my_chat_app/src/utils/string_hardcoded.dart';
-
-// import 'package:my_chat_app/src/authentication/presentation/splash/splash_page.dart';
 import 'package:my_chat_app/src/utils/constants.dart';
 
 void main() async {

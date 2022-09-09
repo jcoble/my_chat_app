@@ -16,11 +16,9 @@ import 'package:my_chat_app/src/routing/routes.dart';
 // });
 
 final goRouterProvider = Provider<GoRouter>((ref) {
-  // final router = Notifier(ref, ref.watch(authControllerProvider));
-  // var authRepoProvider;
   final authRepo = ref.read(authRepositoryProvider);
   return GoRouter(
-    initialLocation: '/',
+    initialLocation: '/splash',
     debugLogDiagnostics: true,
     redirect: (state) {
       // final authRepo = ref.read(authRepositoryProvider);

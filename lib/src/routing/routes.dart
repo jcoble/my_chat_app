@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:my_chat_app/src/features/authentication/presentation/forgot_password/forgot_password.dart';
 import 'package:my_chat_app/src/features/authentication/presentation/sign_in/sign_in_page.dart';
 import 'package:my_chat_app/src/features/authentication/presentation/sign_up/sign_up_page.dart';
-import 'package:my_chat_app/src/features/chat/presentation/chat_page/chat_page.dart';
-import 'package:my_chat_app/src/features/chat/presentation/chat_rooms/chat_list_page.dart';
+import 'package:my_chat_app/src/features/authentication/presentation/splash/splash_page.dart';
+import 'package:my_chat_app/src/features/messages/presentation/chat_page/chat_page.dart';
+import 'package:my_chat_app/src/features/messages/presentation/chat_rooms/room_list_page.dart';
+import 'package:my_chat_app/src/features/room/presentation/rooms_page/rooms_page.dart';
 import 'package:my_chat_app/src/features/user_management/presentation/account_page/account_page.dart';
 import 'package:my_chat_app/src/features/user_management/presentation/profile_page/profile_page.dart';
 import 'package:my_chat_app/src/features/user_management/presentation/settings_page/settings_page.dart';
@@ -26,7 +28,8 @@ class AppRoutes {
   static const String privacyPolicy = 'privacy-policy';
   static const String termsOfService = 'terms-of-service';
   static const String notFound = 'not-found';
-  static const String signOut = '/sign-out';
+  static const String signOut = 'signOut';
+  static const String splash = 'splash';
 
   static List<GoRoute> getRoutes() {
     return [
@@ -35,23 +38,16 @@ class AppRoutes {
         name: AppRoutes.home,
         builder: (context, state) => RoomListPage(),
         routes: [
-          // GoRoute(
-          //   path: AppRoutes.home,
-          //   name: AppRoutes.home,
-          //   pageBuilder: (context, state) => MaterialPage(
-          //     key: state.pageKey,
-          //     fullscreenDialog: false,
-          //     child: HomePage(),
-          //   ),
           GoRoute(
             path: 'room/:id',
             name: AppRoutes.room,
-            builder: (context, state) {
-              final roomId = state.params['id']!;
-              return ChatPage(
-                roomId: roomId,
-              );
-            },
+            pageBuilder: (context, state) => MaterialPage(
+              key: state.pageKey,
+              fullscreenDialog: false,
+              child: ChatPage(
+                roomId: state.params['id']!,
+              ),
+            ),
           ),
           GoRoute(
             path: AppRoutes.settings,
@@ -97,6 +93,8 @@ class AppRoutes {
         builder: (context, state) => SignInPage(),
       ),
       GoRoute(path: '/signUp', name: AppRoutes.signUp, builder: (context, state) => SignUpPage()),
+      GoRoute(path: '/splash', name: AppRoutes.splash, builder: (context, state) => const Preload()),
+      GoRoute(path: '/signOut', name: AppRoutes.signOut, builder: (context, state) => SignInPage()),
     ];
   }
 }

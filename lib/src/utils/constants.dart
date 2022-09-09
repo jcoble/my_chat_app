@@ -20,6 +20,9 @@ const spacer = SizedBox(
   height: 12,
 );
 
+/// Simple preloader inside a Center widget
+const preloader = Center(child: CircularProgressIndicator(color: Colors.orange));
+
 ElevatedButton signInBtn(BuildContext context, IconData icon, String labelText, void Function() onPressed) {
   return ElevatedButton.icon(
     icon: Icon(icon),
@@ -38,9 +41,6 @@ ElevatedButton signInBtn(BuildContext context, IconData icon, String labelText, 
 
 /// Supabase client
 final supabase = Supabase.instance.client;
-
-/// Simple preloader inside a Center widget
-const preloader = Center(child: CircularProgressIndicator(color: Colors.orange));
 
 /// Simple sized box to space out form elements
 const formSpacer = SizedBox(width: 16, height: 16);
@@ -69,13 +69,13 @@ final appTheme = ThemeData.light().copyWith(
   primaryColor: Colors.deepPurple,
   textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(
-      primary: Colors.purple,
+      foregroundColor: Colors.purple,
     ),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      onPrimary: Colors.white,
-      primary: Colors.pink,
+      foregroundColor: Colors.white,
+      backgroundColor: Colors.pink,
     ),
   ),
   inputDecorationTheme: InputDecorationTheme(

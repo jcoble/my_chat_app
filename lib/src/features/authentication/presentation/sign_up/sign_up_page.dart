@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_chat_app/src/routing/routes.dart';
+import 'package:my_chat_app/src/utils/constants.dart';
 import 'package:my_chat_app/src/utils/string_hardcoded.dart';
 import 'package:supabase_auth_ui/supabase_auth_ui.dart';
 import 'package:go_router/go_router.dart';
@@ -18,6 +19,14 @@ class SignUpPage extends StatelessWidget {
             const SupaEmailAuth(
               authAction: AuthAction.signUp,
               redirectUrl: '/',
+            ),
+            spacer,
+            const SupaSocialsAuth(
+              colored: true,
+              socialProviders: [
+                SocialProviders.github,
+                SocialProviders.google,
+              ],
             ),
             Column(
               children: [
