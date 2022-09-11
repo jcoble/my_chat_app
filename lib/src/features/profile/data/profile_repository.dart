@@ -13,13 +13,18 @@ class ProfileRepository {
       return;
     }
 
-    final res = await supabase.from('profiles').select().match({'id': userId}).single();
-    final data = res.data as Map<String, dynamic>?;
-
-    if (data == null) {
-      return;
+    try {
+      final res = await supabase.from('profiles').select().match({'id': userId}).single();
+      final data = res as Map<String, dynamic>;
+      _profiles[userId] = Profile.fromMap(data);
+    } on Exception catch (e) {
+      // TODO
     }
-    _profiles[userId] = Profile.fromMap(data);
+    //
+
+    // if (data == null) {
+    //   return;
+    // }
   }
 }
 

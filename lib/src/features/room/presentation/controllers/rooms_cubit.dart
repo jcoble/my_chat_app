@@ -36,7 +36,6 @@ class RoomCubit extends Cubit<RoomState> {
     }
     final data = List<Map<String, dynamic>>.from(res.data as List);
     _newUsers = data.map(Profile.fromMap).toList();
-    final ProfileRepository profileRepository = ref.read(profileRepositoryProvider);
 
     /// Get realtime updates on rooms that the user is in
     _rawRoomsSubscription =
@@ -48,7 +47,7 @@ class RoomCubit extends Cubit<RoomState> {
       _rooms = participantMaps.map(Room.fromRoomParticipants).where((room) => room.otherUserId != _myUserId).toList();
       for (final room in _rooms) {
         _getNewestMessage(context: context, roomId: room.id);
-        profileRepository.getProfile(room.otherUserId);
+        BlocProvider.of<ProfilesCubit>(context).getProfile(room.otherUserId);
       }
       emit(RoomsLoaded(
         newUsers: _newUsers,

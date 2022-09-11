@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_chat_app/src/routing/app_router.dart';
+import 'package:my_chat_app/src/features/authentication/presentation/sign_in/sign_in_page.dart';
+import 'package:my_chat_app/src/features/room/presentation/rooms_page/rooms_page.dart';
 import 'package:my_chat_app/src/routing/routes.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:go_router/go_router.dart';
 
-class Preload extends StatefulWidget {
-  const Preload({Key? key}) : super(key: key);
+class SplashPage extends StatefulWidget {
+  const SplashPage({Key? key}) : super(key: key);
 
   @override
-  State<Preload> createState() => _PreloadState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
-class _PreloadState extends State<Preload> {
+class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     _redirect();
@@ -22,13 +22,32 @@ class _PreloadState extends State<Preload> {
   Future<void> _redirect() async {
     try {
       final session = await SupabaseAuth.instance.initialSession;
-      if (session == null) {
-        context.goNamed(AppRoutes.signIn);
-      } else {
-        // context.pushReplacementNamed('/chatRoomList');
-        // Navigator.of(context).pushReplacementNamed(AppRoute.home.name);
-        context.go(AppRoutes.home);
-      }
+      // if (session == null) {
+      //   //  Navigator.of(context)
+      //   //     .push(AppRoutes.signIn, (_) => false);
+
+      //   Navigator.of(context).push<void>(
+      //     MaterialPageRoute<void>(
+      //       builder: (BuildContext context) => const SignInPage(),
+      //     ),
+      //   );
+      //   // Navigator.of(context).push<void>(
+      //   //   MaterialPageRoute<void>(
+      //   //     builder: (BuildContext context) => const RoomsPage(),
+      //   //   ),
+      //   // );
+      //   // context.goNamed(AppRoutes.signIn);
+      // } else {
+      //   // context.pushReplacementNamed('/chatRoomList');
+      //   // Navigator.of(context).pushReplacementNamed(AppRoute.home.name);
+      //   // context.go(AppRoutes.rooms);
+
+      //   Navigator.of(context).push<void>(
+      //     MaterialPageRoute<void>(
+      //       builder: (BuildContext context) => const RoomsPage(),
+      //     ),
+      //   );
+      // }
     } catch (error) {
       print(error);
       context.goNamed(AppRoutes.signIn);
@@ -49,7 +68,7 @@ class _PreloadState extends State<Preload> {
 //   SplashPageState createState() => SplashPageState();
 // }
 
-// class SplashPageState extends AuthState<SplashPage> {
+// class SplashPageState extends SupabaseAuthState<SplashPage> {
 //   @override
 //   void initState() {
 //     super.initState();

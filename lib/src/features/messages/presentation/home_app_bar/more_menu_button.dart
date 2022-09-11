@@ -1,4 +1,3 @@
-import 'package:my_chat_app/src/routing/app_router.dart';
 import 'package:my_chat_app/src/routing/routes.dart';
 import 'package:my_chat_app/src/utils/string_hardcoded.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

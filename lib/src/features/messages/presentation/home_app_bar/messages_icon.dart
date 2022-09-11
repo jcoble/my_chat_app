@@ -1,13 +1,12 @@
 import 'package:my_chat_app/src/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 /// Shopping cart icon with items count badge
 class MessagesIcon extends StatelessWidget {
-  MessagesIcon({Key? key}) : super(key: key);
+  const MessagesIcon({Key? key}) : super(key: key);
 
   // * Keys for testing using find.byKey()
-  static const MessagesIconKey = Key('messages-cart-icon');
+  static const messagesIconKey = Key('messages-cart-icon');
 
   @override
   Widget build(BuildContext context) {

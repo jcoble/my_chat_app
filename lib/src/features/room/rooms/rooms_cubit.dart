@@ -3,21 +3,20 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_chat_app/cubits/profiles/profiles_cubit.dart';
-import 'package:my_chat_app/cubits/rooms/rooms_cubit.dart';
+import 'package:my_chat_app/src/features/messages/data/messages_repository.dart';
 import 'package:my_chat_app/src/features/messages/domain/message.dart';
-import 'package:my_chat_app/src/features/messages/presentation/chat_page/messages_controller.dart';
 import 'package:my_chat_app/src/features/profile/domain/profile.dart';
 import 'package:my_chat_app/src/features/room/domain/room.dart';
 import 'package:my_chat_app/src/utils/constants.dart';
 
-// part 'rooms_state.dart';
+part 'rooms_state.dart';
 
 class RoomCubit extends Cubit<RoomState> {
-  RoomCubit({required MessagesController messagesProvider})
-      : _messagesController = messagesProvider,
+  RoomCubit({required MessagesRepository messagesRepository})
+      : _messagesRepository = messagesRepository,
         super(RoomsLoading());
 
-  final MessagesController _messagesController;
+  final MessagesRepository _messagesRepository;
 
   final Map<String, StreamSubscription<Message?>> _messageSubscriptions = {};
 
@@ -40,12 +39,16 @@ class RoomCubit extends Cubit<RoomState> {
     _myUserId = supabase.auth.currentUser!.id;
 
     final res = await supabase.from('profiles').select().not('id', 'eq', _myUserId).order('created_at').limit(12);
-    final error = res.error;
-    if (error != null) {
-      emit(RoomsError('Error loading new users'));
-      return;
-    }
-    final data = List<Map<String, dynamic>>.from(res.data as List);
+    final data = List<Map<String, dynamic>>.from(res as List);
+
+    // final data;
+    // try {
+    //   data = await _getRooms();
+    // } catch (e) {
+    //   emit(RoomsError('Error loading rooms'));
+    //   return;
+    // }
+
     _newUsers = data.map(Profile.fromMap).toList();
 
     /// Get realtime updates on rooms that the user is in
@@ -72,7 +75,7 @@ class RoomCubit extends Cubit<RoomState> {
     required BuildContext context,
     required String roomId,
   }) {
-    _messageSubscriptions[roomId] = _messagesController.messagesRepository
+    _messageSubscriptions[roomId] = _messagesRepository
         .subscribe(roomId)
         .map((messages) => messages.isEmpty ? null : messages.first)
         .listen((message) {
@@ -94,19 +97,30 @@ class RoomCubit extends Cubit<RoomState> {
 
   /// Creates or returns an existing roomID of both participants
   Future<String> createRoom(String otherUserId) async {
-    final res = await supabase.rpc('create_new_room', params: {'other_user_id': otherUserId});
-    final error = res.error;
-    if (error != null) {
-      throw error;
+    try {
+      final res = await supabase.rpc('create_new_room', params: {'other_user_id': otherUserId});
+      emit(RoomsLoaded(rooms: _rooms, newUsers: _newUsers));
+      return res as String;
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      emit(RoomsError('Error creating room'));
+      return '';
     }
-    emit(RoomsLoaded(rooms: _rooms, newUsers: _newUsers));
-    return res.data as String;
+    // final error = res.error;
+    // if (error != null) {
+    //   throw error;
+    // }
   }
 
   @override
   Future<void> close() {
     _rawRoomsSubscription?.cancel();
-    _messagesController.dispose();
+    _messagesRepository.clear();
     return super.close();
+  }
+
+  Future<Map<String, dynamic>> _getRooms() async {
+    final res = await supabase.from('profiles').select().not('id', 'eq', _myUserId).order('created_at').limit(12);
+    return Map<String, dynamic>.from(res);
   }
 }

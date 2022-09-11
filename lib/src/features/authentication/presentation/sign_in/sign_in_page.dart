@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_chat_app/src/features/authentication/data/auth_repository.dart';
-import 'package:my_chat_app/src/features/authentication/presentation/controllers/auth_controller.dart';
-import 'package:my_chat_app/src/features/authentication/presentation/sign_up/sign_up_page.dart';
-import 'package:my_chat_app/src/routing/app_router.dart';
 import 'package:my_chat_app/src/routing/routes.dart';
-import 'package:my_chat_app/src/utils/breakpoint.dart';
 import 'package:my_chat_app/src/utils/string_hardcoded.dart';
 import 'package:supabase_auth_ui/supabase_auth_ui.dart';
 import 'package:go_router/go_router.dart';
 
 class SignInPage extends ConsumerWidget {
-  SignInPage({Key? key}) : super(key: key);
+  const SignInPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

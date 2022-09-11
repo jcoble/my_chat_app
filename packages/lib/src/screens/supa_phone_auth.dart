@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:supabase_auth_ui/src/utils/constants.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../utils/constants.dart';
 import '../utils/supabase_auth_ui.dart';
 
 enum PhoneAuthAction { signIn, signUp }

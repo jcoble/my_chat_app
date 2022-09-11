@@ -7,7 +7,9 @@ class AuthRepository {
   // Stream<User?> authStateChanges() => _authState.stream;
   final _subject = BehaviorSubject<User?>.seeded(Supabase.instance.client.auth.currentUser);
   Stream<User?> get stream => _subject.stream;
-  Stream<User?> authStateChanges() => _subject.stream;
+  Stream<User?> authStateChanges() => Supabase.instance.client.auth.onAuthStateChange((event, session) {
+        _subject.value = session?.user;
+      });
 
   User? get currentUser => _subject.value;
 

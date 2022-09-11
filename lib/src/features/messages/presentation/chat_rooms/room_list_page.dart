@@ -13,4 +13,6 @@ class RoomListPage extends ConsumerWidget {
       ),
     );
   }
+
+  route(String home) {}
 }
